@@ -27,6 +27,22 @@
       font-size: 1.5rem;
       font-weight: normal;
     }
+    nav {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      background-color: #111;
+      border-bottom: 2px solid #FFD700;
+      padding: 0.5rem 0;
+    }
+    nav a {
+      color: #FFD700;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    nav a:hover {
+      text-decoration: underline;
+    }
     section {
       padding: 2rem;
       max-width: 800px;
@@ -50,12 +66,51 @@
     a:hover, button:hover {
       background-color: #e6c200;
     }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1rem;
+    }
+    table, th, td {
+      border: 1px solid #FFD700;
+    }
+    th, td {
+      padding: 0.5rem;
+      text-align: left;
+    }
     footer {
       text-align: center;
       padding: 1rem;
       border-top: 2px solid #FFD700;
       margin-top: 2rem;
     }
+      footer {
+      text-align: center;
+      padding: 1rem;
+      border-top: 2px solid #FFD700;
+      margin-top: 2rem;
+    }
+
+    /* Tabs */
+    #tabs { max-width: 1000px; margin: 2rem auto; padding: 0 2rem; }
+    .tabs { display: flex; gap: .5rem; flex-wrap: wrap; }
+    .tab-btn { background: transparent; color: #FFD700; border: 1px solid #FFD700; padding: .6rem 1rem; border-radius: 999px; cursor: pointer; }
+    .tab-btn.active, .tab-btn:focus { outline: none; background: #FFD700; color: #000; }
+    .tab-panels { margin-top: 1rem; }
+    .tab-panel { display: none; }
+    .tab-panel.active { display: block; }
+
+    /* Table */
+    .table-wrap { overflow-x: auto; border: 1px solid #FFD700; border-radius: 8px; }
+    table { width: 100%; border-collapse: collapse; }
+    th, td { padding: .8rem 1rem; text-align: left; }
+    thead th { background: #111; border-bottom: 2px solid #FFD700; }
+    tbody tr { border-top: 1px solid rgba(255,215,0,.35); }
+    tbody tr:nth-child(odd) { background: #090909; }
+
+    /* Availability */
+    .availability-list { line-height: 1.9; }
+
   </style>
 </head>
 <body>
@@ -65,10 +120,116 @@
     <h2>Hon. John Gamble</h2>
   </header>
 
+  <!-- Tabs: Docket & Availability -->
+  <section id="tabs">
+    <div class="tabs">
+      <button class="tab-btn active" data-tab="docket" aria-controls="tab-docket" aria-selected="true" role="tab">Active Court Docket</button>
+      <button class="tab-btn" data-tab="availability" aria-controls="tab-availability" aria-selected="false" role="tab">Availability</button>
+    </div>
+
+    <div class="tab-panels">
+      <!-- DOCKET TAB -->
+      <div id="tab-docket" class="tab-panel active" role="tabpanel" tabindex="0">
+        <h2>Active Court Docket</h2>
+        <p>Upcoming matters currently scheduled before the Court. (Sample rows shown — replace with live data as needed.)</p>
+        <div class="table-wrap">
+          <table class="docket-table" aria-label="Active Court Docket">
+            <thead>
+              <tr>
+                <th scope="col">Case #</th>
+                <th scope="col">Defendant</th>
+                <th scope="col">ADA</th>
+                <th scope="col">Defense Attorney</th>
+              </tr>
+            </thead>
+            <tbody id="docketBody">
+              <tr>
+                <td>36512</td>
+                <td>Jay Kennedy</td>
+                <td>Ethan Brooks</td>
+                <td>—</td>
+              </tr>
+              <tr>
+                <td>37104</td>
+                <td>Pablo Ramirez</td>
+                <td>J. Carter</td>
+                <td>M. Pecorino</td>
+              </tr>
+              <tr>
+                <td>38009</td>
+                <td>Alex Anderson</td>
+                <td>S. Regan</td>
+                <td>Public Defender</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- AVAILABILITY TAB -->
+      <div id="tab-availability" class="tab-panel" role="tabpanel" aria-hidden="true" tabindex="0">
+        <h2>Availability</h2>
+        <p>Standard weekly chambers and hearing windows. For urgent matters, contact the clerk.</p>
+        <ul class="availability-list">
+          <li><strong>Mon</strong>: 09:00–12:00 (Hearings), 13:30–16:00 (Chambers)</li>
+          <li><strong>Tue</strong>: 10:00–12:00 (Motions), 14:00–16:30 (Chambers)</li>
+          <li><strong>Wed</strong>: 09:00–11:30 (Arraignments), 13:00–15:30 (Hearings)</li>
+          <li><strong>Thu</strong>: 09:30–12:00 (Hearings), 14:00–16:00 (Chambers)</li>
+          <li><strong>Fri</strong>: 09:00–12:00 (Sentencing), 13:00–15:00 (Chambers)</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  
+
+  <!-- Navigation Tabs -->
+  <nav>
+    <a href="#about">About</a>
+    <a href="#docket">Active Court Docket</a>
+    <a href="#availability">Availability</a>
+    <a href="#contact">Contact</a>
+  </nav>
+
   <!-- About -->
   <section id="about">
     <h2>About</h2>
     <p>Welcome to the official page of Judge John Gamble, serving the San Andreas District Court. Judge Gamble is committed to upholding justice, fairness, and integrity in all proceedings.</p>
+  </section>
+
+  <!-- Active Court Docket -->
+  <section id="docket">
+    <h2>Active Court Docket</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Case Number</th>
+          <th>Defendant</th>
+          <th>ADA</th>
+          <th>Defense Attorney</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>2025-001</td>
+          <td>Jane Doe</td>
+          <td>ADA Smith</td>
+          <td>John Lawyer</td>
+        </tr>
+        <tr>
+          <td>2025-002</td>
+          <td>John Roe</td>
+          <td>ADA Johnson</td>
+          <td>Mary Counsel</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- Availability -->
+  <section id="availability">
+    <h2>Availability</h2>
+    <p>Judge Gamble holds court sessions Monday through Friday from 9:00 AM to 4:30 PM, excluding public holidays. Special hearings can be scheduled upon request through the clerk’s office.</p>
   </section>
 
   <!-- Contact -->
@@ -89,6 +250,21 @@
 
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Simple tabs
+    const tabButtons = document.querySelectorAll('.tab-btn');
+    const tabPanels = document.querySelectorAll('.tab-panel');
+    tabButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const target = btn.getAttribute('data-tab');
+        tabButtons.forEach(b => { b.classList.remove('active'); b.setAttribute('aria-selected','false'); });
+        tabPanels.forEach(p => { p.classList.remove('active'); p.setAttribute('aria-hidden','true'); });
+        btn.classList.add('active');
+        btn.setAttribute('aria-selected','true');
+        const panel = document.getElementById('tab-' + target);
+        if(panel){ panel.classList.add('active'); panel.setAttribute('aria-hidden','false'); panel.focus(); }
+      });
+    });
   </script>
 </body>
 </html>
